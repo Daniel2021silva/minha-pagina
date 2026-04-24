@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexControl | Sistemas Inteligentes para Empresas</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#06111f;color:#fff}
+a{text-decoration:none;color:inherit}
+.container{width:92%;max-width:1180px;margin:auto}
+
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(6,17,31,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-size:28px;font-weight:900;color:#38bdf8}
+.nav span{color:#22c55e}
+.btn{
+  display:inline-block;background:#22c55e;color:#03130b;
+  padding:15px 24px;border-radius:12px;font-weight:900;
+  box-shadow:0 12px 30px rgba(34,197,94,.25)
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:#0ea5e9;color:white}
+
+.hero{
+  padding:80px 0;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center
+}
+.badge{
+  display:inline-block;background:rgba(56,189,248,.12);
+  border:1px solid rgba(56,189,248,.25);
+  color:#38bdf8;padding:9px 15px;border-radius:999px;
+  font-weight:800;margin-bottom:20px
+}
+h1{font-size:52px;line-height:1.05;margin-bottom:22px}
+h1 span{color:#38bdf8}
+.hero p{font-size:20px;line-height:1.7;color:#cbd5e1;margin-bottom:28px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:35px}
+.stat{
+  background:#0f1d31;border:1px solid rgba(255,255,255,.08);
+  padding:18px;border-radius:16px
+}
+.stat strong{font-size:25px;color:#22c55e;display:block}
+.stat small{color:#cbd5e1}
+
+.system-board{
+  background:linear-gradient(135deg,#0ea5e9,#22c55e);
+  padding:3px;border-radius:28px
+}
+.system-inner{
+  background:#091727;border-radius:26px;padding:22px
+}
+.topbar{display:flex;gap:8px;margin-bottom:18px}
+.dot{width:12px;height:12px;border-radius:50%;background:#334155}
+.screen-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.screen-card{
+  background:#0f1d31;border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:18px
+}
+.screen-card h4{color:#38bdf8;margin-bottom:12px}
+.bar{height:12px;border-radius:20px;background:#1e293b;margin:10px 0}
+.bar.green{background:#16a34a;width:80%}
+.bar.blue{background:#0ea5e9;width:65%}
+.big-number{font-size:28px;color:#22c55e;font-weight:900;margin:10px 0}
+
+section{padding:75px 0}
+.dark{background:#050b14}
+.title{text-align:center;font-size:38px;margin-bottom:16px}
+.subtitle{text-align:center;color:#cbd5e1;font-size:18px;max-width:760px;margin:0 auto 45px;line-height:1.6}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{
+  background:#0f1d31;border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;padding:28px;box-shadow:0 18px 50px rgba(0,0,0,.22)
+}
+.card h3{font-size:22px;color:#38bdf8;margin-bottom:12px}
+.card p{color:#cbd5e1;line-height:1.65}
+
+.proof{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px
+}
+.proof-card{
+  background:linear-gradient(180deg,#0f1d31,#091727);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;overflow:hidden
+}
+.proof-img{
+  height:180px;background:#081525;padding:16px;
+  display:flex;align-items:center;justify-content:center
+}
+.fake-system{
+  width:100%;height:100%;background:#0f1d31;border-radius:16px;
+  padding:14px;border:1px solid rgba(255,255,255,.08)
+}
+.fake-row{height:10px;background:#26364d;border-radius:20px;margin:9px 0}
+.fake-row:nth-child(2){width:75%;background:#0ea5e9}
+.fake-row:nth-child(3){width:60%;background:#22c55e}
+.fake-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.fake-box{height:45px;background:#14243a;border-radius:12px}
+.proof-content{padding:22px}
+.proof-content h3{color:#22c55e;margin-bottom:10px}
+.proof-content p{color:#cbd5e1;line-height:1.6}
+
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.mock{
+  background:#0f1d31;border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;padding:20px
+}
+.mock-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.mock-title{font-weight:900;color:#38bdf8}
+.mock-body{background:#07111f;border-radius:18px;padding:18px}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px}
+.kpi div{background:#102038;padding:13px;border-radius:14px}
+.kpi strong{color:#22c55e;display:block;font-size:20px}
+.table-line{height:13px;background:#1e293b;border-radius:20px;margin:12px 0}
+
+.offer{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center
+}
+ul{list-style:none}
+li{margin:14px 0;color:#dbeafe;font-size:17px}
+li:before{content:"✓ ";color:#22c55e;font-weight:bold}
+.price{font-size:43px;font-weight:900;color:#22c55e;margin:18px 0}
+.warning{color:#fde68a;font-weight:900;margin-top:18px}
+
+.cta{
+  text-align:center;
+  background:linear-gradient(135deg,#0ea5e9,#16a34a);
+  padding:75px 25px;border-radius:32px
+}
+.cta h2{font-size:40px;margin-bottom:15px}
+.cta p{font-size:19px;line-height:1.6;margin-bottom:28px}
+
+.whats-fixed{
+  position:fixed;right:20px;bottom:20px;z-index:100;
+  background:#22c55e;color:#03130b;padding:16px 20px;
+  border-radius:999px;font-weight:900;box-shadow:0 12px 35px rgba(0,0,0,.45)
+}
+
+footer{text-align:center;padding:35px;color:#94a3b8}
+
+@media(max-width:900px){
+  .hero,.offer{grid-template-columns:1fr}
+  .grid,.proof,.gallery{grid-template-columns:1fr}
+  h1{font-size:38px}
+  .title{font-size:31px}
+  .stats{grid-template-columns:1fr}
+  .screen-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<a class="whats-fixed" href="https://wa.me/5553991214988?text=Olá,%20Daniel.%20Quero%20um%20sistema%20inteligente%20para%20minha%20empresa." target="_blank">
+  WhatsApp
+</a>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Nex<span>Control</span></div>
+    <a class="btn" href="https://wa.me/5553991214988?text=Olá,%20quero%20organizar%20minha%20empresa%20com%20um%20sistema." target="_blank">
+      Quero organizar minha empresa
+    </a>
+  </div>
+</header>
+
+<main>
+
+<section class="container hero">
+  <div>
+    <span class="badge">Sistemas inteligentes sob medida</span>
+    <h1>Sua empresa no controle, com <span>sistemas que organizam, vendem e mostram o lucro</span>.</h1>
+    <p>
+      Eu crio sistemas profissionais para empresas que ainda perdem tempo com papel,
+      planilhas bagunçadas, estoque sem controle, ordens de serviço desorganizadas
+      e falta de visão financeira.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn" href="https://wa.me/5553991214988?text=Olá,%20quero%20um%20orçamento%20para%20um%20sistema%20inteligente." target="_blank">
+        Falar direto com especialista
+      </a>
+      <a class="btn btn-dark" href="#sistemas">Ver modelos de sistemas</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong>100%</strong><small>visual pelo celular</small></div>
+      <div class="stat"><strong>24h</strong><small>empresa mais organizada</small></div>
+      <div class="stat"><strong>+controle</strong><small>estoque, vendas e OS</small></div>
+    </div>
+  </div>
+
+  <div class="system-board">
+    <div class="system-inner">
+      <div class="topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+      <div class="screen-grid">
+        <div class="screen-card">
+          <h4>Vendas Hoje</h4>
+          <div class="big-number">R$ 2.840</div>
+          <div class="bar green"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="screen-card">
+          <h4>Ordens Abertas</h4>
+          <div class="big-number">18</div>
+          <div class="bar blue"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="screen-card">
+          <h4>Estoque</h4>
+          <div class="bar green"></div>
+          <div class="bar blue"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="screen-card">
+          <h4>Financeiro</h4>
+          <div class="big-number">+32%</div>
+          <div class="bar green"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="title">Quem está por trás da NexControl?</h2>
+
+    <p class="subtitle">
+      Não é uma agência genérica. É alguém que entende negócio real.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Experiência prática</h3>
+        <p>
+          A NexControl nasce da experiência real no dia a dia de empresas que
+          enfrentam problemas com organização, controle de estoque, vendas e serviços.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Visão de negócio</h3>
+        <p>
+          Mais do que sistemas, o foco é criar soluções que ajudam o dono a enxergar
+          sua empresa com clareza e tomar decisões melhores.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Soluções sob medida</h3>
+        <p>
+          Cada sistema é pensado de acordo com a realidade do cliente,
+          simples de usar, direto ao ponto e sem complicação.
+        </p>
+      </div>
+
+    </div>
+
+    <br><br>
+
+    <div class="card" style="text-align:center">
+      <h3>Sobre o desenvolvedor</h3>
+
+      <p style="font-size:18px;line-height:1.7;color:#cbd5e1">
+        Meu nome é <strong style="color:#22c55e">Daniel Borges</strong>.
+        Sou mestre de obras e desenvolvedor de sistemas inteligentes para empresas.
+        <br><br>
+        Meu objetivo é ajudar negócios a saírem do improviso e entrarem no controle,
+        com sistemas simples, funcionais e realmente úteis no dia a dia.
+      </p>
+
+      <br>
+
+      <a class="btn" href="https://wa.me/5553991214988?text=Olá Daniel,%20vi%20seu%20site%20e%20quero%20entender%20melhor%20seu%20trabalho" target="_blank">
+        Falar direto comigo
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section class="dark">
+  <div class="container">
+    <h2 class="title">O problema não é falta de esforço. É falta de controle.</h2>
+    <p class="subtitle">
+      Muita empresa vende, trabalha, atende cliente, mas não sabe exatamente onde está ganhando,
+      onde está perdendo e quais decisões precisa tomar.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Estoque perdido</h3>
+        <p>Produto some, sobra ou falta porque não existe controle real de entrada e saída.</p>
+      </div>
+      <div class="card">
+        <h3>Ordens bagunçadas</h3>
+        <p>Serviços ficam sem status, sem histórico e sem organização para atender melhor.</p>
+      </div>
+      <div class="card">
+        <h3>Lucro invisível</h3>
+        <p>Você sabe que vendeu, mas não sabe com clareza quanto realmente lucrou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="title">Provas reais de aplicação</h2>
+    <p class="subtitle">
+      Esses são tipos de sistemas que já fazem sentido para negócios reais e podem ser adaptados para cada empresa.
+    </p>
+
+    <div class="proof">
+      <div class="proof-card">
+        <div class="proof-img">
+          <div class="fake-system">
+            <div class="fake-row"></div><div class="fake-row"></div><div class="fake-row"></div>
+            <div class="fake-boxes"><div class="fake-box"></div><div class="fake-box"></div></div>
+          </div>
+        </div>
+        <div class="proof-content">
+          <h3>Assistência técnica / celular</h3>
+          <p>Ordem de serviço, cadastro de cliente, status do conserto, vendas, estoque e impressão.</p>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <div class="proof-img">
+          <div class="fake-system">
+            <div class="fake-row"></div><div class="fake-row"></div><div class="fake-boxes"><div class="fake-box"></div><div class="fake-box"></div></div><div class="fake-row"></div>
+          </div>
+        </div>
+        <div class="proof-content">
+          <h3>SaaS para igreja</h3>
+          <p>Secretaria, financeiro, departamentos, congregações, permissões e painel administrativo.</p>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <div class="proof-img">
+          <div class="fake-system">
+            <div class="fake-boxes"><div class="fake-box"></div><div class="fake-box"></div></div>
+            <div class="fake-row"></div><div class="fake-row"></div><div class="fake-row"></div>
+          </div>
+        </div>
+        <div class="proof-content">
+          <h3>Pré-moldados / estoque</h3>
+          <p>Controle de insumos, produção, estoque, relatórios, custos e acompanhamento pelo celular.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sistemas" class="dark">
+  <div class="container">
+    <h2 class="title">Galeria de sistemas inteligentes</h2>
+    <p class="subtitle">
+      Telas simuladas para mostrar como seu sistema pode ficar: moderno, claro, organizado e profissional.
+    </p>
+
+    <div class="gallery">
+      <div class="mock">
+        <div class="mock-header">
+          <div class="mock-title">Dashboard Financeiro</div>
+          <small>Online</small>
+        </div>
+        <div class="mock-body">
+          <div class="kpi">
+            <div><strong>R$ 8.920</strong><small>Receita</small></div>
+            <div><strong>R$ 3.140</strong><small>Lucro</small></div>
+            <div><strong>42</strong><small>Vendas</small></div>
+          </div>
+          <div class="table-line"></div><div class="table-line"></div><div class="table-line"></div>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock-header">
+          <div class="mock-title">Ordem de Serviço</div>
+          <small>Impressão</small>
+        </div>
+        <div class="mock-body">
+          <div class="table-line"></div>
+          <div class="table-line" style="width:70%"></div>
+          <div class="table-line" style="width:85%"></div>
+          <div class="kpi">
+            <div><strong>12</strong><small>Abertas</small></div>
+            <div><strong>7</strong><small>Em reparo</small></div>
+            <div><strong>4</strong><small>Finalizadas</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock-header">
+          <div class="mock-title">Controle de Estoque</div>
+          <small>Produtos</small>
+        </div>
+        <div class="mock-body">
+          <div class="kpi">
+            <div><strong>154</strong><small>Itens</small></div>
+            <div><strong>9</strong><small>Baixo estoque</small></div>
+            <div><strong>28</strong><small>Entradas</small></div>
+          </div>
+          <div class="table-line"></div><div class="table-line"></div><div class="table-line"></div>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock-header">
+          <div class="mock-title">Sistema pelo Celular</div>
+          <small>Responsivo</small>
+        </div>
+        <div class="mock-body">
+          <div class="table-line" style="height:45px"></div>
+          <div class="table-line"></div>
+          <div class="table-line" style="width:75%"></div>
+          <div class="table-line" style="height:45px;background:#16a34a"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <section>
+  <div class="container">
+    <h2 class="title">Para quem é a NexControl?</h2>
+    <p class="subtitle">
+      Para negócios que precisam parar de improvisar e começar a controlar vendas,
+      estoque, serviços, clientes e financeiro com clareza.
+    </p>
+
+    <div class="grid">
+      <div class="card"><h3>Lojas de celular</h3><p>Controle de vendas, estoque, assistência técnica, ordens de serviço e relatórios.</p></div>
+      <div class="card"><h3>Assistências técnicas</h3><p>Organização de clientes, aparelhos, consertos, status, orçamento e impressão de OS.</p></div>
+      <div class="card"><h3>Pré-moldados</h3><p>Controle de insumos, produção, estoque, pedidos, custos e relatórios pelo celular.</p></div>
+      <div class="card"><h3>Igrejas e instituições</h3><p>Secretaria, financeiro, departamentos, membros, congregações e permissões de acesso.</p></div>
+      <div class="card"><h3>Comércios locais</h3><p>Vendas, caixa, produtos, clientes, pagamentos e controle básico de faturamento.</p></div>
+      <div class="card"><h3>Prestadores de serviço</h3><p>Agenda, clientes, serviços, cobranças, histórico e acompanhamento financeiro.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="container">
+    <h2 class="title">Prova social</h2>
+    <p class="subtitle">
+      Exemplos de soluções já desenvolvidas e aplicadas em negócios reais.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>“Agora consigo enxergar os pedidos e o financeiro.”</h3>
+        <p>
+          Sistema desenvolvido para gestão de igreja com áreas de secretaria,
+          financeiro, departamentos, congregações e controle de acesso.
+        </p>
+        <br>
+        <strong style="color:#22c55e">Projeto: SaaS para Igreja</strong>
+      </div>
+
+      <div class="card">
+        <h3>“A ordem de serviço ficou muito mais profissional.”</h3>
+        <p>
+          Sistema para assistência técnica com cadastro de clientes, aparelhos,
+          serviços, status, vendas, estoque e impressão de OS.
+        </p>
+        <br>
+        <strong style="color:#22c55e">Projeto: Loja e assistência técnica</strong>
+      </div>
+
+      <div class="card">
+        <h3>“Agora dá para controlar produção e insumos.”</h3>
+        <p>
+          Sistema voltado para pré-moldados, com controle de estoque,
+          materiais, produção, relatórios e visualização pelo celular.
+        </p>
+        <br>
+        <strong style="color:#22c55e">Projeto: Controle para pré-moldados</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <h2 class="title">O que posso criar para sua empresa</h2>
+    <p class="subtitle">Você não precisa começar grande. Precisa começar com o sistema certo.</p>
+
+    <div class="grid">
+      <div class="card"><h3>Controle de estoque</h3><p>Entrada, saída, saldo, categorias, custo, preço de venda e alertas.</p></div>
+      <div class="card"><h3>Vendas e caixa</h3><p>Registro de vendas, formas de pagamento, relatórios e histórico.</p></div>
+      <div class="card"><h3>Ordem de serviço</h3><p>Cliente, equipamento, defeito, status, orçamento, impressão e entrega.</p></div>
+      <div class="card"><h3>Financeiro</h3><p>Receitas, despesas, lucro, fluxo de caixa e indicadores para decisão.</p></div>
+      <div class="card"><h3>Dashboards</h3><p>Gráficos simples para visualizar o que está acontecendo na empresa.</p></div>
+      <div class="card"><h3>Automação WhatsApp</h3><p>Atendimento inicial, captação de clientes e respostas automáticas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="container offer">
+    <div>
+      <h2 class="title" style="text-align:left">Você não está comprando código. Está comprando clareza.</h2>
+      <p style="color:#cbd5e1;font-size:18px;line-height:1.7">
+        Um sistema inteligente ajuda o dono a enxergar a empresa.
+        O que vende mais, o que dá prejuízo, quais clientes voltam,
+        quais produtos estão parados e onde existe oportunidade de crescimento.
+      </p>
+      <p class="warning">⚠️ Atendo poucos projetos por mês para manter qualidade.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:27px;color:#fff">Pacote inicial</h3>
+      <div class="price">A partir de R$ 500</div>
+      <ul>
+        <li>Sistema personalizado para sua necessidade</li>
+        <li>Visual profissional e responsivo</li>
+        <li>Acesso pelo celular e computador</li>
+        <li>Controle de dados da empresa</li>
+        <li>Treinamento básico de uso</li>
+        <li>Suporte mensal opcional</li>
+      </ul>
+      <br>
+      <a class="btn" href="https://wa.me/5553991214988?text=Olá,%20Daniel.%20Quero%20um%20orçamento%20para%20um%20sistema%20personalizado." target="_blank">
+        Pedir orçamento no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="cta">
+    <h2>Quer parar de trabalhar no escuro?</h2>
+    <p>
+      Me chama no WhatsApp, explica sua empresa e eu te mostro qual sistema faz mais sentido para você começar.
+    </p>
+    <a class="btn" href="https://wa.me/5553991214988?text=Olá,%20Daniel.%20quero%20uma%20análise%20para%20criar%20um%20sistema%20na%20minha%20empresa." target="_blank">
+      Quero uma análise pelo WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>NexControl</strong> — Sistemas Inteligentes para Empresas</p>
+  <p>Desenvolvido por Daniel Borges | WhatsApp: (53) 99121-4988</p>
+</footer>
+
+</body>
+</html>
